@@ -18,13 +18,15 @@ namespace zich{
         void setCol(int col);
         void setArr(const std::vector<double>& arr,int row,int col);
         void setMatrix(const std::vector<double>& arr,int row,int col);
-        // remove afterwards
-        void printMat();
 
         Matrix();
         Matrix(const std::vector<double>& arr, int n, int m);
         ~Matrix() = default;
 
+        // remove afterwards
+        void printMat();
+        void Test_Input(const Matrix& other) const;
+        double Matrix_Sum() const;
 
         // Plus and Minus Operators
         Matrix operator+() const ;
@@ -44,9 +46,9 @@ namespace zich{
 
         // addition and substition by 1, prefix and postfix
         Matrix& operator++();
-        Matrix& operator++(int);
+        Matrix operator++(int);
         Matrix& operator--();
-        Matrix& operator--(int);
+        Matrix operator--(int);
 
         // multiplication operator
         friend Matrix operator*(double real_number,const Matrix& other);
