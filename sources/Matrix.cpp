@@ -266,10 +266,31 @@ namespace zich{
 
     // input and output oprators
     std::ostream& operator<< (std::ostream& output, const Matrix& other){
+        double input = 0;
+        for (int i = 0; i < other.rows; i++)
+        {
+            output << "[";
+            for (int j = 0; j < other.columns; j++)
+            {
+                input = j + (int)other.rows*i;
+                output << other.array.at(input);
+                if( j == other.columns - 1){
+                    output<<"]";
+                }
+                else{
+                    output<<" ";
+                }
+            }
+            if( i != other.rows - 1){
+                output<<"\n";
+            }
+        }
         return output;
     }
 
     std::istream& operator>> (std::istream& input , Matrix& other){
+        std::string s(std::istreambuf_iterator<char>(input), {});
+        throw std::invalid_argument(s);
         return input;
     }
 
