@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export DEBUG=1
 source grade_utils
 TIMEOUT=20
 run_in_folder_if_exists "$1"

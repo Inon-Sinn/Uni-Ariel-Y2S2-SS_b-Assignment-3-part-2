@@ -14,12 +14,12 @@ SOURCES=$(wildcard $(SOURCE_PATH)/*.cpp)
 HEADERS=$(wildcard $(SOURCE_PATH)/*.hpp)
 OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
-run: demo
+run: test
 
 demo: Demo.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o demo
 
-test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS)
+test: TestRunner.o StudentTest2.o StudentTest3.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp $(HEADERS)

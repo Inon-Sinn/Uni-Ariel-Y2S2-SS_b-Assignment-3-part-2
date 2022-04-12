@@ -6,14 +6,50 @@
 
 namespace zich{
 
-    Matrix::Matrix()
-        : array({}), rows(0), columns(0){
-        
+    void Matrix::setRow(int row){
+        if(row<=0){
+            throw std::invalid_argument("The MAtrix size as to be at least 1");
+        }
+        this -> rows = row;
     }
 
-    Matrix::Matrix(std::vector<double> arr, int n, int m)
-        : array(arr), rows(n), columns(m){
-        
+    void Matrix::setCol(int col){
+        if(col<=0){
+            throw std::invalid_argument("The MAtrix size as to be at least 1");
+        }
+        this -> columns = col;
+    }
+
+    void Matrix::setArr(const std::vector<double>& arr,int row,int col){
+        if(arr.size() != row*col){
+            throw std::invalid_argument("Given data does not fit given parameters");
+        }
+        this -> array = arr;
+    }
+
+    void Matrix::setMatrix(const std::vector<double>& arr,int row,int col){
+        setRow(row);
+        setCol(col);
+        setArr(arr, row, col);
+    }
+
+    Matrix::Matrix(){
+        columns = 1;
+        rows = 1;
+        setMatrix({0},1,1);
+    }
+
+    Matrix::Matrix(const std::vector<double>& arr, int n, int m){
+        columns = 1;
+        rows = 1;
+        setMatrix(arr,n,m);
+    }
+
+    void Matrix::printMat(){
+        for (size_t i = 0; i < array.size(); i++)
+        {
+            std::cout << array.at(i) <<",";
+        }
     }
 
     // plus and minus operators

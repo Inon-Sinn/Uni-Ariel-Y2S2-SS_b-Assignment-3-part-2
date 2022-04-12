@@ -14,8 +14,15 @@ namespace zich{
         int rows;
         int columns;
     public:
+        void setRow(int row);
+        void setCol(int col);
+        void setArr(const std::vector<double>& arr,int row,int col);
+        void setMatrix(const std::vector<double>& arr,int row,int col);
+        // remove afterwards
+        void printMat();
+
         Matrix();
-        Matrix(std::vector<double> arr, int n, int m);
+        Matrix(const std::vector<double>& arr, int n, int m);
         ~Matrix() = default;
 
 

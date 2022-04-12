@@ -20,7 +20,15 @@ using namespace zich;
 
 int main() {
 
-  Matrix a{{},3,3};
-  cout << "End of demo!" << endl;
+  try
+  {
+    Matrix a{{3, 0, 0, 0, 3, 0, 0, 0, 3},3,3};
+    a.printMat();
+  }
+  catch(const std::exception& e)
+  {
+    std::cout << e.what(); // information from length_error printed
+  }
+  cout << endl << "End of demo!" << endl;
   return 0;
 }
