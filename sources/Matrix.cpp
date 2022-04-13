@@ -51,14 +51,6 @@ namespace zich{
         setMatrix(arr,n,m);
     }
 
-    // DELETE THIS
-    void Matrix::printMat(){
-        for (size_t i = 0; i < array.size(); i++)
-        {
-            std::cout << array.at(i) <<",";
-        }
-    }
-
     // Function that test the input
     void Matrix::Test_Input(const Matrix& other) const{
         if(other.rows != this -> rows || other.columns != this -> columns){
@@ -293,8 +285,35 @@ namespace zich{
         if(input[start] != '['){
             throw std::invalid_argument("Input has something else than invalid before a bracket");
         }
-        bool atNumber = true;
-        // unfinshed
+        const int char_value_0 = 48;
+        const int char_value_9 = 57;
+        const int num_mul = 10;
+        double value = 0;
+        
+        start++;
+        double cur_num = 1;
+        while(input[start] != ']' && start < input.length()){
+            while (input[start] >= char_value_0 && input[start] <= char_value_9)
+            {
+                if(cur_num > arr.size()){
+                    value = (int)input[start] - char_value_0;
+                    arr.push_back(value);
+                }
+                else{
+                    value = (int)input[start] - char_value_0;
+                    value = arr.at(cur_num-1)*num_mul + value;
+                    arr.at(cur_num-1) = value;
+                }
+                start++;
+            }
+            cur_num++;
+            if(input[start] != ']' && input[start] != ' '){
+                throw std::invalid_argument("Input has a incorrect bracket");
+            }
+            if(input[start] == ' '){
+                start++;
+            }
+        }
         return arr; 
     }
 
@@ -317,7 +336,7 @@ namespace zich{
             }
 
             // Test in between the brackets
-            start += 2*(unsigned long)cols;
+            start += 2*(unsigned long)cols +1;
             if(s.at(start)=='\n'){
                 if(start == s.size()-1){
                     start++;
@@ -327,7 +346,7 @@ namespace zich{
                 }
             }
             else{
-                if(s.at(start)==',' && s.at(start)==' '){
+                if(s.at(start)==',' && s.at(start+1)==' '){
                     start += 2;
                 }
                 else{

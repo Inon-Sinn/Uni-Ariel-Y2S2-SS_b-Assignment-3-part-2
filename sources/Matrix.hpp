@@ -23,8 +23,6 @@ namespace zich{
         Matrix(const std::vector<double>& arr, int n, int m);
         ~Matrix() = default;
 
-        // remove afterwards
-        void printMat();
         void Test_Input(const Matrix& other) const;
         double Matrix_Sum() const;
 
