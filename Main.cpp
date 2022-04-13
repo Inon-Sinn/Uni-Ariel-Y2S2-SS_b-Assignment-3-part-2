@@ -1,11 +1,8 @@
 /**
- * Demo file for the exercise on numbers with units
+ * Main file for the exercise
  *
- * @author Erel Segal-Halevi
- * @since 2019-02
+ * @author Inon Sinn
  * 
- * Edited by Tal Zichlinsky
- * @since 2022-02
  */
 
 #include <iostream>

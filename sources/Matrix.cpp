@@ -288,10 +288,63 @@ namespace zich{
         return output;
     }
 
+    std::vector<double> check_braket(std::string input,unsigned long start){
+        std::vector<double> arr;
+        if(input[start] != '['){
+            throw std::invalid_argument("Input has something else than invalid before a bracket");
+        }
+        bool atNumber = true;
+        // unfinshed
+        return arr; 
+    }
+
+
     std::istream& operator>> (std::istream& input , Matrix& other){
         std::string s(std::istreambuf_iterator<char>(input), {});
-        throw std::invalid_argument(s);
+        unsigned long start = 0;
+        int rows = 0;
+        int cols = 0;
+        std::vector<double> arr;
+
+        // going over the brackets
+        cols = check_braket(s,0).size();
+        while(start < s.length()){
+            std::vector<double> bracket = check_braket(s,start);
+            rows++;
+            // Test if all the brackets are of the same size
+            if(cols != bracket.size()){
+                throw std::invalid_argument("Input has rows with different sizes");
+            }
+
+            // Test in between the brackets
+            start += 2*(unsigned long)cols;
+            if(s.at(start)=='\n'){
+                if(start == s.size()-1){
+                    start++;
+                }
+                else{
+                    throw std::invalid_argument("Input has line end in the middle of the input");
+                }
+            }
+            else{
+                if(s.at(start)==',' && s.at(start)==' '){
+                    start += 2;
+                }
+                else{
+                    throw std::invalid_argument("Input has something else than ', ' between the brackets");
+                }
+            }
+
+            // copy the brackets numbers into the complete array
+            for (size_t i = 0; i < bracket.size(); i++)
+            {
+                arr.push_back(bracket.at(i));
+            }
+            
+        }
+        other = Matrix(arr,rows,cols);
         return input;
     }
+
 
 };
